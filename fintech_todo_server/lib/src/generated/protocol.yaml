@@ -1,2 +1,7 @@
 greeting:
   - hello:
+task:
+  - createTask:
+  - getTasks:
+  - updateTask:
+  - deleteTask:

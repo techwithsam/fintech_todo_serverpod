@@ -1,4 +1,5 @@
 import 'package:fintech_todo_client/fintech_todo_client.dart';
+import 'package:fintech_todo_flutter/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_auth_email_flutter/serverpod_auth_email_flutter.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
@@ -48,65 +49,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Serverpod Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
       home: sessionManager.isSignedIn
           ? const MyHomePage(title: 'Serverpod Example')
           : const SignInUp(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  MyHomePageState createState() => MyHomePageState();
-}
-
-class MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-
-    sessionManager.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Welcome to Serverpod!")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    NetworkImage(sessionManager.signedInUser?.imageUrl ?? ''),
-              ),
-              title:
-                  Text(sessionManager.signedInUser?.userName ?? 'No username'),
-              subtitle: Text(sessionManager.signedInUser?.email ?? 'No email'),
-              trailing: IconButton(
-                icon: const Icon(Icons.logout),
-                onPressed: () async {
-                  await sessionManager.signOutDevice().then((v) {
-                    if (!context.mounted) return;
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const SignInUp(),
-                      ),
-                    );
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -1,0 +1,12 @@
+
+class: Task
+
+table: task
+
+fields:
+   id: int?
+   title: String
+   description: String
+   amount: double
+   dueDate: DateTime?
+   userId: int

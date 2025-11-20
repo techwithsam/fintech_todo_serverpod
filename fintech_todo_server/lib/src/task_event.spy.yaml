@@ -1,0 +1,7 @@
+
+class: TaskEvent
+
+fields:
+   type: String # Type of event: created, updated, deleted
+   task: Task # The task associated with the event
+   id: int? # Optional event ID
